@@ -1,13 +1,17 @@
 [project]
 name = "finetuning"
 version = "0.1.0"
-description = "Add your description here"
+description = "Fine Tuning LLMs"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "jupyterlab>=4.4.5",
-    "langchain>=0.3.27",
-    "langchain-huggingface>=0.3.1",
-    "torch>=2.7.1",
+    "torch==2.6.0+cu124",
     "transformers>=4.54.0",
+    "arxiv==2.2.0",
+    "evaluate==0.4.5",
+    "pandas==2.2.2",
+    "scikit-learn==1.6.1",
+    "datasets==4.0.0",
+    "matplotlib==3.10.0"
 ]
