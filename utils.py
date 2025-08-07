@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 import evaluate
 
 
-def get_arxiv_data()
+def get_arxiv_data():
     client = arxiv.Client()
 
     # artificial intelligence abstraccs
@@ -50,7 +50,7 @@ def get_arxiv_data()
                     )
     ]
 
-   return pd.DataFrame(ai_results + ir_results + ro_results)
+    return pd.DataFrame(ai_results + ir_results + ro_results)
 
 
 def plot_target_distribution_combined(
@@ -98,17 +98,3 @@ def plot_target_distribution_combined(
     plt.tight_layout()
     plt.show()
 
-
-def calculate_roc_auc(model, loader: DataLoader) -> Dict[str, np.float64]:
-
-  roc_auc_score = evaluate.load("roc_auc", "multiclass")
-  model.eval()
-  for batch in loader:
-      batch = {k: v.to(device) for k, v in batch.items()}
-      with torch.no_grad():
-          outputs = model(**batch)
-          scores = torch.nn.functional.softmax(outputs.logits, dim=-1)
-          roc_auc_score.add_batch(references=batch["labels"],
-                                prediction_scores=scores)
-
-  return roc_auc_score.compute(multi_class="ovr")
