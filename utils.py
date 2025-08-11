@@ -54,22 +54,22 @@ def get_arxiv_data():
 
 
 def plot_target_distribution_combined(
-    train_df: pd.DataFrame, 
-    val_df: pd.DataFrame, 
-    test_df: pd.DataFrame, 
-    target_col:str = 'label'
+    y_train: pd.Series, 
+    y_val: pd.Series, 
+    y_test: pd.Series, 
+    target_col:str = 'Label'
 ) -> None:
     """
     Create a bar plot showing percentage distribution of target values across datasets
     """
     # Calculate percentages for each dataset
-    datasets = {'Train': train_df, 'Validation': val_df, 'Test': test_df}
+    datasets = {'Train': y_train, 'Validation': y_val, 'Test': y_test}
     percentage_data = []
     
-    for dataset_name, df in datasets.items():
+    for dataset_name, y in datasets.items():
         # Calculate percentage for each target value
-        value_counts = df[target_col].value_counts()
-        percentages = (value_counts / len(df)) * 100
+        value_counts = y.value_counts()
+        percentages = (value_counts / len(y)) * 100
         
         # Create rows for the dataframe
         for target_value, percentage in percentages.items():
@@ -97,4 +97,3 @@ def plot_target_distribution_combined(
     
     plt.tight_layout()
     plt.show()
-
